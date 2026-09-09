@@ -5,11 +5,14 @@ interface App {
     id: string;
     icon: React.ReactNode;
     component: React.ReactNode;
+    isOpen: boolean;
+    
 }
 interface HotBarContextType {
     apps: App[];
     addApp: (app: App) => void;
     removeApp: (id: string) => void;
+    toggleApp: (id: string) => void;
 }
 
 const HotBarContext = createContext<HotBarContextType | undefined>(undefined);
@@ -17,8 +20,7 @@ const HotBarContext = createContext<HotBarContextType | undefined>(undefined);
 export function HotBarControler({ children }: { children: React.ReactNode }) {
 
     const [apps, setApps] = useState<App[]>([]);
-
-    //gestion de como poner y sacar elementos del hot bar
+    
     const addApp = (app: App) => {
         setApps(prev => {
             //evitamos dupes
@@ -27,16 +29,26 @@ export function HotBarControler({ children }: { children: React.ReactNode }) {
             }
             //si no falla devuelve el componente
             return [...prev, app];
-        });};
-
+        });
+    };
     //elimina un elementos por ID si existe
     const removeApp = (id: string) => {
         setApps(prev => prev.filter(app => app.id !== id));
     };
 
+    const toggleApp = (id: string) =>{
+        setApps(prev =>
+        prev.map(app =>
+            app.id === id
+                ? { ...app, isOpen: !app.isOpen }
+                : app
+        )
+    );   
+    };
+
     //devuelve los elementos en children 
     return (
-        <HotBarContext.Provider value={{ apps, addApp, removeApp }}>
+        <HotBarContext.Provider value={{ apps, addApp, removeApp, toggleApp}}>
             {children}
         </HotBarContext.Provider>
     );
