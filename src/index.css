@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 html,
 body,
 #root {
@@ -6,4 +7,38 @@ body,
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+
+@layer components {
+    .articulo {
+        @apply w-full overflow-hidden rounded-lg border border-gray-700 bg-gray-900/90 text-gray-200 ;
+    }
+
+    .articulo-titulo {
+        @apply flex items-center justify-between bg-[#388044]/75 px-4 py-3 font-semibold cursor-pointer select-none ; 
+    }
+
+    .articulo-contenido {
+        @apply grid grid-rows-[0fr] transition-all duration-760  ;
+    }
+
+    .articulo-contenido.expandido {
+        @apply grid-rows-[1fr] m-4;
+    }
+
+    .articulo-contenido > div {
+        @apply overflow-hidden min-h-0;
+    }
+    .articulo-indicador {
+        @apply text-xs transition-transform duration-200 ;
+    }
+}
+
+
+@layer components {
+   
+
+    
+
+    
 }

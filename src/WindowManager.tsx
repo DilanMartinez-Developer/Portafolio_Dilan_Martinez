@@ -80,15 +80,7 @@ function WindowManager() {
                 };
 
                 return (
-                    <div
-                        key={app.id}
-                        className="fixed"
-                        style={{
-                            left: position.x,
-                            top: position.y
-                        }}
-                    >
-
+                    <div key={app.id} className="fixed resize overflow-auto" style={{left: position.x,top: position.y}}>
                         {/* Barra superior */}
                         <div
                             onMouseDown={(e) => startDrag(e, app.id)}
@@ -97,7 +89,7 @@ function WindowManager() {
                             
                             {app.id}
 
-                            <div className="ml-auto flex flex-row h-full">
+                            <div className="ml-auto flex flex-row h-full ">
                                 <button onClick={() => toggleApp(app.id)} className="ml-auto w-8 h-full cursor-pointer hover:bg-white/20">-    </button>
                                 <button onClick={() => toggleApp(app.id)} className="ml-auto w-8 h-full cursor-pointer hover:bg-white/20">=    </button>
                                 <button onClick={() => removeApp(app.id)} className="ml-auto w-8 h-full cursor-pointer hover:bg-red-500/60">x    </button>
