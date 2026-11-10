@@ -1,17 +1,23 @@
+
 import { useHotBar } from "./HotBarContext";
 
 function HB_Div() {
-    //
     const { apps } = useHotBar();
-    //div del hotbar, dentro tiene el sisema para "usar" los elementos dados por app
+
     return (
-        <div className="bg-[#2f4015] fixed bottom-0 left-0 w-full h-[4vh] flex justify-end">
+        <div className="fixed bottom-0 left-0 z-50 w-full h-12 flex justify-end items-center gap-2 px-3 bg-black/40 backdrop-blur-xl border-t border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
 
             {apps.map(app => (
-                <div key={app.id} className="w-[4vh] h-full flex items-center justify-center">
+                <div
+                    key={app.id}
+                    className={`relative flex items-center justify-center w-10 h-10 p-2 rounded-lg transition-all duration-200 ${
+                        app.isOpen
+                            ? "bg-white/20 hover:bg-black/30"
+                            : "bg-white/5 hover:bg-white/20"
+                    }`}
+                >
                     {app.icon}
                 </div>
-
             ))}
 
         </div>

@@ -10,12 +10,19 @@ body,
 }
 
 @layer components {
+    .pie-pagina-div{
+        @apply flex flex-row ml-10 mr-10;
+    }
+    .redsocial-pie-pagina{
+        @apply transform duration-300 hover:scale-110 flex flex-row bg-indigo-200/30 p-1 mt-4 rounded-lg ring-2 ring-blue-50/10 shadow-xl/20;
+    }
+
     .articulo {
         @apply w-full overflow-hidden rounded-lg border border-gray-700 bg-gray-900/90 text-gray-200 ;
     }
 
     .articulo-titulo {
-        @apply flex items-center justify-between bg-[#388044]/75 px-4 py-3 font-semibold cursor-pointer select-none ; 
+        @apply flex items-center justify-between bg-[#2e6b38]/75 px-4 py-3 font-semibold cursor-pointer select-none ; 
     }
 
     .articulo-contenido {
@@ -32,13 +39,76 @@ body,
     .articulo-indicador {
         @apply text-xs transition-transform duration-200 ;
     }
-}
 
+    /* Escritorio */
+    .desktop {
+        @apply relative w-full h-full overflow-hidden;
+        background: var(--wallpaper);
+        background-size: cover;
+        background-position: center;
+        transition: background 300ms ease;
+    }
 
-@layer components {
-   
+    /* Opciones de fondo */
+    .desktop[data-wallpaper="default"] {
+        --wallpaper: linear-gradient(135deg, #182848, #4b6cb7);
+    }
 
-    
+    .desktop[data-wallpaper="dark"] {
+        --wallpaper: linear-gradient(135deg, #090909, #303030);
+    }
 
-    
+    .desktop[data-wallpaper="green"] {
+        --wallpaper: linear-gradient(135deg, #142d1c, #47734b);
+    }
+
+    .desktop[data-wallpaper="purple"] {
+        --wallpaper: linear-gradient(135deg, #24143d, #68469a);
+    }
+
+    /* Distribución de iconos */
+    .desktop-icons {
+        @apply absolute top-3 left-3 flex flex-col flex-wrap content-start gap-2;
+        height: calc(100% - 6rem);
+    }
+
+    /* Icono individual */
+    .desktop-icon {
+        @apply flex flex-col items-center justify-center gap-1;
+        @apply w-20 h-24 rounded-md cursor-pointer select-none;
+        @apply text-white text-center;
+        @apply transition-colors duration-150;
+        @apply hover:bg-white/15 active:bg-white/25;
+    }
+
+    .desktop-icon-visual {
+        @apply flex items-center justify-center;
+        @apply w-12 h-12 text-4xl;
+        @apply drop-shadow-md;
+    }
+
+    .desktop-icon-name {
+        @apply w-full px-1 text-xs leading-tight;
+        @apply drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)];
+        @apply break-words;
+    }
+
+    /* Selector de fondo temporal */
+    .wallpaper-selector {
+        @apply absolute right-4 top-4 z-50;
+        @apply flex gap-2 p-2 rounded-lg;
+        @apply bg-black/30 backdrop-blur-md;
+        @apply border border-white/10;
+    }
+
+    .wallpaper-option {
+        @apply w-6 h-6 rounded-full cursor-pointer;
+        @apply border-2 border-white/30;
+        @apply transition-transform duration-150;
+        @apply hover:scale-110;
+    }
+
+    .wallpaper-option.activo {
+        @apply border-white scale-110;
+    }
 }

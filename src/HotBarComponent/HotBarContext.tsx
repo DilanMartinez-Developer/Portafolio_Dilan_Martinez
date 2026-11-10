@@ -6,6 +6,7 @@ interface App {
     icon: React.ReactNode;
     component: React.ReactNode;
     isOpen: boolean;
+    size: string;
     
 }
 interface HotBarContextType {
@@ -13,6 +14,7 @@ interface HotBarContextType {
     addApp: (app: App) => void;
     removeApp: (id: string) => void;
     toggleApp: (id: string) => void;
+    maxApp: (id:string) => void;
 }
 
 const HotBarContext = createContext<HotBarContextType | undefined>(undefined);
@@ -37,18 +39,17 @@ export function HotBarControler({ children }: { children: React.ReactNode }) {
     };
 
     const toggleApp = (id: string) =>{
-        setApps(prev =>
-        prev.map(app =>
-            app.id === id
-                ? { ...app, isOpen: !app.isOpen }
-                : app
-        )
-    );   
+        setApps(prev => prev.map(app => app.id === id ? { ...app, isOpen: !app.isOpen }: app));   
     };
+
+    //no logro que funciones, despues lo veo <<<<<<
+    const maxApp = (id: string) =>{
+        setApps(prev => prev.map(app =>app.id === id ? {...app, size: "size-500"}: app));
+    }
 
     //devuelve los elementos en children 
     return (
-        <HotBarContext.Provider value={{ apps, addApp, removeApp, toggleApp}}>
+        <HotBarContext.Provider value={{ apps, addApp, removeApp, toggleApp, maxApp}}>
             {children}
         </HotBarContext.Provider>
     );

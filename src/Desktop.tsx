@@ -1,5 +1,8 @@
+
+import type { ReactNode } from "react";
+
 interface DesktopIconProps {
-    icon: React.ReactNode;
+    icon: ReactNode;
     name: string;
     onDoubleClick?: () => void;
 }
@@ -9,16 +12,18 @@ export function DesktopIcon({
     name,
     onDoubleClick
 }: DesktopIconProps) {
-
     return (
-        <button onDoubleClick={onDoubleClick} className="w-[6vh] h-[6vh] flex flex-col items-center justify-center cursor-pointer">
-            <div className="text-3xl">
+        <button
+            onDoubleClick={onDoubleClick}
+            className="desktop-icon"
+        >
+            <div className="desktop-icon-visual">
                 {icon}
             </div>
 
-            <p className="text-white text-sm text-center">
+            <span className="desktop-icon-name">
                 {name}
-            </p>
+            </span>
         </button>
     );
 }

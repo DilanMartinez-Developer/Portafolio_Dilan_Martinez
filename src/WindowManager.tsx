@@ -20,23 +20,13 @@ function WindowManager() {
         y: 0
     });
 
-    const startDrag = (
-        e: React.MouseEvent<HTMLDivElement>,
-        id: string
-    ) => {
-
+    const startDrag = (e: React.MouseEvent<HTMLDivElement>,id: string) => {
         const position = positions[id] ?? {
             x: 100,
             y: 100,
         };
-
         setDragging(id);
-
-        setOffset({
-            x: e.clientX - position.x,
-            y: e.clientY - position.y
-        });
-
+        setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
     };
 
     const moveWindow = (e: React.MouseEvent) => {
@@ -44,7 +34,6 @@ function WindowManager() {
         if (dragging === null) return;
 
         setPositions(prev => {
-
             return {
                 ...prev,
                 [dragging]: {
@@ -62,11 +51,7 @@ function WindowManager() {
     };
 
     return (
-        <div
-            onMouseMove={moveWindow}
-            onMouseUp={stopDrag}
-        >
-
+        <div onMouseMove={moveWindow} onMouseUp={stopDrag}>
             {apps.map(app => {
 
                 if (!app.isOpen) {
@@ -80,25 +65,21 @@ function WindowManager() {
                 };
 
                 return (
-                    <div key={app.id} className="fixed resize overflow-auto" style={{left: position.x,top: position.y}}>
+                    <div key={app.id} className="fixed " style={{left: position.x,top: position.y}}>
                         {/* Barra superior */}
-                        <div
-                            onMouseDown={(e) => startDrag(e, app.id)}
-                            className="cursor-move bg-gray-700 text-white h-[3vh] flex items-center px-2 flex-row"
-                        >
+                        <div onMouseDown={(e) => startDrag(e, app.id)} className="cursor-move bg-gray-700 text-white h-[3vh] flex items-center px-2 flex-row select-none">
                             
                             {app.id}
 
                             <div className="ml-auto flex flex-row h-full ">
                                 <button onClick={() => toggleApp(app.id)} className="ml-auto w-8 h-full cursor-pointer hover:bg-white/20">-    </button>
-                                <button onClick={() => toggleApp(app.id)} className="ml-auto w-8 h-full cursor-pointer hover:bg-white/20">=    </button>
                                 <button onClick={() => removeApp(app.id)} className="ml-auto w-8 h-full cursor-pointer hover:bg-red-500/60">x    </button>
                             </div>
 
                             
                         </div>
 
-                        {/* Contenido de la aplicación */}
+                        {/*contenido de la aplicacion*/}
                         <div>
                             {app.component}
                         </div>
