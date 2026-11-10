@@ -1,24 +1,37 @@
-import { useState } from 'react'
 
-import './App.css'
+import { WebIconDesktop } from './HotBarComponent/Apps/AppWeb';
+import { ConfigIconDesktop } from './HotBarComponent/Apps/AppConfig';
+import { ABMEIconDesktop } from './HotBarComponent/Apps/AboutMe';
+import DskStyle from './dskStyle';
+
+import { useHotBar } from './HotBarComponent/HotBarContext';
+import { ABMEIcon, ABMECoponent } from "./HotBarComponent/Apps/AboutMe";
+import { useEffect } from "react";
+
 
 function App() {
-  const [conteo, setCount] = useState(0)
+    const { addApp } = useHotBar();
+    useEffect(() => {
+        addApp({
+            id: "About Me",
+            icon: <ABMEIcon />,
+            component: <ABMECoponent />,
+            isOpen: true,
+            size: "size-256"
+        });
+    }, []);
+    return (
+        
+        <DskStyle>
+            <section className="desktop-icons">
+                <ABMEIconDesktop/>
 
-  return (
-    <>
-      <section id="center">
-        <h1>Estado 1, eliminando el template de VITE</h1>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((conteo) => conteo + 1)}
-        >
-         clicks {conteo}
-        </button>
-      </section>
-    </>
-  )
+                <ConfigIconDesktop />
+
+                <WebIconDesktop />
+            </section>
+        </DskStyle>
+    );
 }
 
-export default App
+export default App;
